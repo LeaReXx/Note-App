@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/fonts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Montserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="navigation">
+                <div class="message">
+                    <h1>به ابزار نوت اَپ خوش آمدید</h1>
+                </div>
+                <div class="night-mod"><i class="fas fa-moon"></i></div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <div class="fixed">
+                <div class="right-section">
+                    <div class="btn-head">
+                        <h2><i class="far fa-sticky-note"></i>افزودن نوت جدید</h2>
+                        <div class="btn">
+                            <button id="accept"><i class="fas fa-save"></i>ذخیره نوت</button>
+                            <button id="clear"><i class="fas fa-eraser"></i>پاک کردن</button>
+                        </div>
+                    </div>
+                    <div class="note-box">
+                        <form id="note-form">
+                            <label for="note-title">عنوان:</label><br>
+                            <input type="text" id="note-title" placeholder="عنوان را وارد کنید"><br>
+                            <label for="note-description">توضیحات:</label><br>
+                            <textarea id="note-description"
+                                placeholder="توضیحات اضافی را اینجا تایپ کنید..."></textarea>
+                        </form>
+                    </div>
+                    <div class="options">
+                        <div class="accordion">
+                            <h3>شخصی سازی</h3>
+                        </div>
+                        <div class="tool">
+                            <div class="note-option">
+                                <div class="change-color">
+                                    <h4><i class="fas fa-tint"></i>تغییر رنگ</h4>
+                                    <div class="title-color">
+                                        <label for="title-color-set">رنگ عنوان:</label>
+                                        <input type="color" id="title-color-set" value="#000000">
+                                    </div>
+                                    <div class="description-color">
+                                        <label for="description-color-set">رنگ توضیحات:</label>
+                                        <input type="color" id="description-color-set" value="#000000">
+                                    </div>
+                                    <div class="background-color">
+                                        <label for="background-color-set">رنگ پس زمینه</label>
+                                        <input type="color" id="background-color-set" value="#067B9E">
+                                    </div>
+                                </div>
+                                <div class="change-size">
+                                    <h4><i class="fas fa-font"></i>تغییر سایز</h4>
+                                    <div class="title-size">
+                                        <label for="title-size-set">اندازه عنوان</label>
+                                        <select id="title-size-set" class="select-style">
+                                            <option value="14" hidden selected>انتخاب کنید</option>
+                                            <option value="20" class="small-option">کوچک</option>
+                                            <option value="22" class="medium-option">متوسط</option>
+                                            <option value="24" class="big-option">بزرگ</option>
+                                        </select>
+                                    </div>
+                                    <div class="description-size">
+                                        <label for="description-size-set">اندازه توضیحات</label>
+                                        <select id="description-size-set">
+                                            <option value="14" hidden selected>انتخاب کنید</option>
+                                            <option value="14" class="small-option">کوچک</option>
+                                            <option value="16" class="medium-option">متوسط</option>
+                                            <option value="18" class="big-option">بزرگ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="demo-box">
+                            <div class="accordion">
+                                <h3>پیش نمایش</h3>
+                            </div>
+                            <div class="tool">
+                                <div class="note-demo">
+                                    <div class="note-preview">
+                                        <h2 class="note-preview-title">تست عنوان پیش نمایش</h2>
+                                        <div class="note-preview-description">
+                                            <p class="note-preview-description-text">لورم ایپسوم متن ساختگی با تولید
+                                                سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و
+                                                متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
+                                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی
+                                                می باشد.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /start» Developer information -->
+                    <div class="dev">
+                        <p>Made With <span class="galb"> ❤️</span> By <a
+                                href="https://discord.com/users/394974967906828288"><span class="discord"
+                                    title="SePeHr#0641">SePeHr#0641<i class="fab fa-discord"></i></span></a></p>
+                    </div>
+                    <!-- Developer information «end/ -->
+                </div>
+            </div>
+            <div class="left-section">
+                <div class="notes-added">
+                    <div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="/script/script.js"></script>
+</body>
+
+</html>
