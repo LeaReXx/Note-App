@@ -37,6 +37,113 @@ a {
     text-decoration: none;
 }
 
+/* Preload style & Animation  */
+@-webkit-keyframes loader9 {
+    0% {
+        -webkit-transform: scale(0.3);
+        opacity: 0.4;
+    }
+
+    50% {
+        -webkit-transform: scale(0.7);
+        opacity: 0.8;
+    }
+
+    60% {
+        -webkit-transform: scale(0.8);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+.loader {
+    background-color: rgb(103, 155, 253);
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    animation: fadeout 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.loader-nine {
+    position: relative;
+}
+
+.loader-nine div {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    position: absolute;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.loader-nine div:nth-child(1) {
+    top: -30px;
+    left: 0;
+    -webkit-animation: loader9 0.5s -0.4s infinite linear;
+}
+
+.loader-nine div:nth-child(2) {
+    top: -20px;
+    left: 20px;
+    -webkit-animation: loader9 0.5s -0.35s infinite linear;
+}
+
+.loader-nine div:nth-child(3) {
+    top: 0px;
+    left: 30px;
+    -webkit-animation: loader9 0.5s -0.30s infinite linear;
+}
+
+.loader-nine div:nth-child(4) {
+    top: 20px;
+    left: 20px;
+    -webkit-animation: loader9 0.5s -0.25s infinite linear;
+}
+
+.loader-nine div:nth-child(5) {
+    top: 30px;
+    left: 0px;
+    -webkit-animation: loader9 0.5s -0.2s infinite linear;
+}
+
+.loader-nine div:nth-child(6) {
+    top: 20px;
+    left: -20px;
+    -webkit-animation: loader9 0.5s -0.15s infinite linear;
+}
+
+.loader-nine div:nth-child(7) {
+    top: 0px;
+    left: -30px;
+    -webkit-animation: loader9 0.5s -0.1s infinite linear;
+}
+
+.loader-nine div:nth-child(8) {
+    top: -20px;
+    left: -20px;
+    -webkit-animation: loader9 0.5s 0s infinite linear;
+}
+
 /* mobile first  */
 /* navigation Message + night mod  */
 .navigation {
@@ -140,7 +247,7 @@ a {
     font-size: 25px;
 }
 
-/* add new note style  */
+/* User Input Style  */
 .note-box {
     margin: 0 10px;
 }
@@ -344,6 +451,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .note-preview-title {
     border-bottom: 2px dashed rgba(0, 0, 0, 0.6);
+    display: flex;
     padding: 0 5px 10px 5px;
     font-size: 20px;
 }
@@ -353,8 +461,7 @@ input[type="color"]::-webkit-color-swatch {
     font-size: 18px;
 }
 
-
-
+/* developer Info Style */
 .dev {
     width: 100%;
     text-align: center;
@@ -396,21 +503,45 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .notes-added {
-   display: flex;
-   flex-wrap: wrap; 
-   row-gap: 15px;
-   justify-content: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 15px;
+    justify-content: center;
 }
 
 .note-father {
-    max-width: 280px;
+    width: 280px;
     background-color: #067B9E;
     border-radius: 15px;
     padding: 10px;
     margin: 0 15px;
     border: 2px solid #707070;
-    
+    position: relative;
+    cursor: pointer;
+    transition: all .2s;
 }
+
+.note-father:hover {
+    border: 2px solid rgb(250, 58, 58);
+}
+
+.fa-trash-alt {
+    font-size: 50px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    opacity: 0;
+    color: rgb(250, 58, 58);
+    transition: all .2s;
+}
+
+.note-father:hover .fa-trash-alt {
+    opacity: 0.4;
+}
+
+/* Responsive For min Width 410px or Higher */
 @media screen and (min-width: 410px) {
     .right-section {
         display: flex;
@@ -429,6 +560,7 @@ input[type="color"]::-webkit-color-swatch {
     }
 }
 
+/* Responsive For min Width 650px or Higher */
 @media screen and (min-width: 650px) {
     section {
         flex-direction: row;
@@ -476,7 +608,7 @@ input[type="color"]::-webkit-color-swatch {
         direction: ltr;
         overflow-y: auto;
     }
-    
+
     #note-title,
     #note-description {
         max-width: 100%;
@@ -503,8 +635,17 @@ input[type="color"]::-webkit-color-swatch {
         overflow-y: auto;
     }
 
+    .notes-added {
+        justify-content: center;
+    }
+
+    .note-father {
+        margin: auto;
+        margin: 0 5px;
+    }
 }
 
+/* Responsive For min Width 1024px or Higher */
 @media screen and (min-width: 1024px) {
 
     .right-section {
@@ -523,16 +664,20 @@ input[type="color"]::-webkit-color-swatch {
     .options {
         max-width: unset;
     }
+
     .change-size {
         justify-content: space-around;
     }
+
     .fixed {
         width: unset;
         min-width: 450px;
     }
+
     .dev {
         width: 450px;
     }
+
     .left-section {
         width: 100%;
 

@@ -17,6 +17,21 @@
 </head>
 
 <body>
+    <!-- /start» Preload  -->
+    <div class="loader">
+        <div class="loader-nine">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <!-- Preload «end/ -->
+    </div>
+    <!-- /start» Header  -->
     <header>
         <nav>
             <div class="navigation">
@@ -27,10 +42,15 @@
             </div>
         </nav>
     </header>
+    <!-- Header «end/ -->
     <main>
+        <!-- /start» Section  -->
         <section>
             <div class="fixed">
+                <!-- /start» Right Side  -->
                 <div class="right-section">
+                    <!-- /start» Right Side Head Btn & Text  -->
+
                     <div class="btn-head">
                         <h2><i class="far fa-sticky-note"></i>افزودن نوت جدید</h2>
                         <div class="btn">
@@ -38,15 +58,20 @@
                             <button id="clear"><i class="fas fa-eraser"></i>پاک کردن</button>
                         </div>
                     </div>
+                    <!-- Right Side Head Btn & Text «end/ -->
+                    <!-- /start» Input Form  -->
                     <div class="note-box">
                         <form id="note-form">
                             <label for="note-title">عنوان:</label><br>
-                            <input type="text" id="note-title" placeholder="عنوان را وارد کنید"><br>
+                            <input type="text" id="note-title" maxlength="48" placeholder="عنوان را وارد کنید"><br>
                             <label for="note-description">توضیحات:</label><br>
-                            <textarea id="note-description"
+                            <textarea id="note-description" maxlength="300"
                                 placeholder="توضیحات اضافی را اینجا تایپ کنید..."></textarea>
                         </form>
                     </div>
+                    <!-- Input Form «end/ -->
+                    <!-- /start» Note Option  -->
+                    <!-- /start» Set Font & Color  -->
                     <div class="options">
                         <div class="accordion">
                             <h3>شخصی سازی</h3>
@@ -73,7 +98,7 @@
                                     <div class="title-size">
                                         <label for="title-size-set">اندازه عنوان</label>
                                         <select id="title-size-set" class="select-style">
-                                            <option value="14" hidden selected>انتخاب کنید</option>
+                                            <option value="20" hidden selected>انتخاب کنید</option>
                                             <option value="20" class="small-option">کوچک</option>
                                             <option value="22" class="medium-option">متوسط</option>
                                             <option value="24" class="big-option">بزرگ</option>
@@ -91,6 +116,9 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Set Font & Color «end/ -->
+
+                        <!-- /start» Demo  -->
                         <div class="demo-box">
                             <div class="accordion">
                                 <h3>پیش نمایش</h3>
@@ -110,7 +138,10 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Demo «end/ -->
                     </div>
+                    <!-- Note Option «end/ -->
+
                     <!-- /start» Developer information -->
                     <div class="dev">
                         <p>Made With <span class="galb"> ❤️</span> By <a
@@ -120,12 +151,16 @@
                     <!-- Developer information «end/ -->
                 </div>
             </div>
+            <!-- Right Side «end/ -->
+            <!-- /start» Left Side -->
             <div class="left-section">
                 <div class="notes-added">
-                    <div></div>
+                    <!-- Notes will be added here from JS -->
                 </div>
             </div>
+            <!-- Left Side «end/ -->
         </section>
+        <!-- Section «end/ -->
     </main>
     <script type="module" src="/script/script.js"></script>
 </body>
