@@ -5,19 +5,37 @@
     box-sizing: border-box;
     direction: rtl;
     color: var(--text-color);
+    transition: all 0.2s;
 }
 
-/* root  */
+/* color root  */
 :root {
-    --text-color: #000000;
+    --head-txt-border: rgba(0, 0, 0, 0.4);
+    --text-color: rgb(0, 0, 0);
     --right-sec-bg: rgb(204, 204, 204);
-    --right-sec-border: rgba(0, 0, 0, 0.6);
+    --user-input-bg: rgb(255, 255, 255);
     --left-sec-bg: rgb(240, 240, 240);
-    --accordion-bg: #ffffff;
+    --accordion-bg: rgb(255, 255, 255);
+    --acc-tool-bg: rgb(231, 231, 231);
+    --color-input-bg: rgb(187, 187, 187);
+    --size-input-bg: rgb(214, 214, 214);
 }
+
 
 body {
     font-family: IRANsans;
+}
+
+.dark-mode {
+    --head-txt-border: rgba(255, 255, 255, 0.4);
+    --text-color: rgb(241, 241, 241);
+    --right-sec-bg: rgb(44, 57, 75);
+    --user-input-bg: rgb(51, 71, 86);
+    --left-sec-bg: rgb(8, 32, 50);
+    --accordion-bg: rgb(51, 71, 86);
+    --acc-tool-bg: rgb(43, 72, 94);
+    --color-input-bg: rgb(187, 187, 187);
+    --size-input-bg: rgb(29, 51, 68);
 }
 
 /* section */
@@ -156,20 +174,39 @@ a {
 }
 
 .message {
+
     font-weight: 500;
 }
 
 .message h1 {
+    color: #000000;
     font-size: 18px;
     font-weight: bold;
 }
 
-.night-mod {
+.night-mode {
     font-size: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.fa-moon,
+.fa-sun {
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.fa-moon {
+    color: rgb(53, 53, 53);
+}
+
+.fa-sun {
+    color: rgb(255, 204, 51);
 }
 
 .navigation .message,
-.navigation .night-mod {
+.navigation .night-mode {
     margin: 0 10px;
 }
 
@@ -193,7 +230,7 @@ a {
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
-    border-bottom: 2px dashed rgba(0, 0, 0, 0.4);
+    border-bottom: 2px dashed var(--head-txt-border);
     padding: 10px;
 }
 
@@ -202,7 +239,7 @@ a {
     font-weight: 500;
 }
 
-.btn #accept,
+.btn #save,
 .btn #clear {
     font-size: 16px;
     font-weight: bold;
@@ -215,18 +252,18 @@ a {
     color: white;
 }
 
-.btn #accept:hover,
+.btn #save:hover,
 .btn #clear:hover {
     transform: scale(1.08);
     opacity: 1;
 }
 
-.btn #accept:active,
+.btn #save:active,
 .btn #clear:active {
     transform: scale(1);
 }
 
-#accept {
+#save {
     border: 2px solid rgb(0, 165, 0);
     background-color: rgb(0, 165, 0);
 }
@@ -271,16 +308,23 @@ a {
     font-size: 16px;
     font-weight: 400;
     padding: 5px 10px;
+    background-color: var(--user-input-bg);
 }
 
 #note-form input:focus,
 #note-form textarea:focus {
-    border: outset 2px solid rgb(103, 155, 253);
-    -webkit-box-shadow: 0px 0px 16px 0px rgb(103, 155, 253);
-    box-shadow: 0px 0px 16px 0px rgb(103, 155, 253);
+    -webkit-box-shadow: 0px 0px 27px 13px rgba(103,155,253,0.3); 
+    box-shadow: 0px 0px 27px 13px rgba(103,155,253,0.3);
     outline: none;
+    background-color: var(--user-input-bg);
+
 }
 
+#note-form input::placeholder,
+#note-form textarea::placeholder {
+    color: var(--text-color);
+    opacity: 0.7;
+}
 
 
 #note-description {
@@ -300,6 +344,7 @@ a {
     border-radius: 3px;
     cursor: pointer;
     position: relative;
+    transition: all .2s;
 }
 
 .accordion h3 {
@@ -319,6 +364,10 @@ a {
     transform: translate(-5px, -30%);
 }
 
+.accordion.active {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
 .accordion.active::after {
     content: "\002D";
 }
@@ -330,7 +379,7 @@ a {
 }
 
 .tool {
-    background-color: rgb(231, 231, 231);
+    background-color: var(--acc-tool-bg);
     border-radius: 0 0 10px 10px;
     max-height: 0;
     overflow: hidden;
@@ -351,6 +400,7 @@ a {
     align-items: center;
     flex-wrap: wrap;
     border-bottom: 2px dashed rgba(0, 0, 0, 0.4);
+
 }
 
 .change-color h4,
@@ -388,6 +438,7 @@ input[type="color"] {
     width: 24px;
     height: 24px;
     margin-right: 5px;
+    background-color: inherit;
 }
 
 input[type="color"]::-webkit-color-swatch-wrapper {
@@ -402,6 +453,7 @@ input[type="color"]::-webkit-color-swatch {
 .title-size,
 .description-size {
     margin: 5px 0;
+    color: var(--text-color);
 }
 
 .change-size {
@@ -413,7 +465,8 @@ input[type="color"]::-webkit-color-swatch {
     border-radius: 3px;
     border: 0;
     padding: 3px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--size-input-bg);
+    font-size: 16px;
 }
 
 .small-option {
@@ -467,7 +520,7 @@ input[type="color"]::-webkit-color-swatch {
     text-align: center;
     position: fixed;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.281);
+    background-color: rgba(0, 0, 0, 0.3);
     font-family: inherit;
     font-weight: 500;
 }
@@ -500,6 +553,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .left-section {
     padding: 20px;
+    background-color: var(--left-sec-bg);
 }
 
 .notes-added {
@@ -515,7 +569,7 @@ input[type="color"]::-webkit-color-swatch {
     border-radius: 15px;
     padding: 10px;
     margin: 0 15px;
-    border: 2px solid #707070;
+    border: 2px solid #ffffff00;
     position: relative;
     cursor: pointer;
     transition: all .2s;

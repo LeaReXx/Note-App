@@ -38,7 +38,7 @@
                 <div class="message">
                     <h1>به ابزار نوت اَپ خوش آمدید</h1>
                 </div>
-                <div class="night-mod"><i class="fas fa-moon"></i></div>
+                <div class="night-mode"><i class="fas fa-moon" id="theme"></i></div>
             </div>
         </nav>
     </header>
@@ -54,14 +54,14 @@
                     <div class="btn-head">
                         <h2><i class="far fa-sticky-note"></i>افزودن نوت جدید</h2>
                         <div class="btn">
-                            <button id="accept"><i class="fas fa-save"></i>ذخیره نوت</button>
+                            <button id="save"><i class="fas fa-save"></i>ذخیره نوت</button>
                             <button id="clear"><i class="fas fa-eraser"></i>پاک کردن</button>
                         </div>
                     </div>
                     <!-- Right Side Head Btn & Text «end/ -->
                     <!-- /start» Input Form  -->
                     <div class="note-box">
-                        <form id="note-form">
+                        <form id="note-form" autocomplete="off">
                             <label for="note-title">عنوان:</label><br>
                             <input type="text" id="note-title" maxlength="48" placeholder="عنوان را وارد کنید"><br>
                             <label for="note-description">توضیحات:</label><br>
