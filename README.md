@@ -1,8 +1,8 @@
 # Note-App
 
-This is an example of a note app project written in Javascript without using the Framework
+This is a note app written in Javascript without using any framework.
 
-## Features:chart:
+## Features:white_check_mark:
 
 - Add a description for notes
 - Change text and background color
