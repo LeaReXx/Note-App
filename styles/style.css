@@ -6,6 +6,7 @@
     direction: rtl;
     color: var(--text-color);
     transition: all 0.2s ease-out;
+    word-wrap: break-word;
 }
 
 /* color root  */
@@ -523,6 +524,7 @@ input[type="color"]::-webkit-color-swatch {
     background-color: rgba(0, 0, 0, 0.3);
     font-family: inherit;
     font-weight: 500;
+    z-index: 1;
 }
 
 .galb {
@@ -553,6 +555,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .left-section {
     padding: 20px;
+    height: clamp(100vh,auto,auto);
     background-color: var(--left-sec-bg);
 }
 
@@ -561,6 +564,7 @@ input[type="color"]::-webkit-color-swatch {
     flex-wrap: wrap;
     row-gap: 15px;
     justify-content: center;
+    margin-bottom: 2rem;
 }
 
 .note-father {
