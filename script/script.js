@@ -137,29 +137,46 @@ clearBtn.addEventListener('click', clearBtnAction)
 // click to delete note 
 
 function deleteNote(event) {
-        if(event.target.classList.contains('note')){
-            event.target.parentElement.remove();
-        } else if (event.target.classList.contains('note-text')) {
-            event.target.parentElement.parentElement.remove()
-        } else {
-            event.target.remove()
-        }
+    if (event.target.classList.contains('note')) {
+        event.target.parentElement.remove();
+    } else if (event.target.classList.contains('note-text')) {
+        event.target.parentElement.parentElement.remove()
+    } else {
+        event.target.remove()
+    }
 }
 
 
 // dark mode 
 let darkMode = $.querySelector('.night-mode')
 let modeIcon = $.getElementById('theme')
-function darkModeBtn(){
-    if (modeIcon.classList.contains('fa-moon')){
-        modeIcon.classList.remove('fa-moon')
-        modeIcon.classList.add('fa-sun')
-        $.body.classList.add('dark-mode')
-    } else {
+let darkTheme = false
+function darkModeBtn() {
+    if (!darkTheme) {
         modeIcon.classList.remove('fa-sun')
         modeIcon.classList.add('fa-moon')
         $.body.classList.remove('dark-mode')
-
+        darkTheme = true
+        localStorage.setItem('theme', 'light')
+    } else {
+        modeIcon.classList.remove('fa-moon')
+        modeIcon.classList.add('fa-sun')
+        $.body.classList.add('dark-mode')
+        localStorage.setItem('theme', 'dark')
+        darkTheme = false
     }
 }
 darkMode.addEventListener('click', darkModeBtn)
+
+function windowOnLoadTheme() {
+    let currentTheme = localStorage.getItem('theme')
+    if(currentTheme === null || currentTheme === 'light') {
+        darkTheme = false
+        darkModeBtn()
+    } else {
+        darkTheme = true
+        darkModeBtn()
+    }
+}
+window.addEventListener('load', windowOnLoadTheme)
+
