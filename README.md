@@ -10,9 +10,10 @@ This is a note app written in Javascript without using any framework.
 - See preview of note before save
 - Dark theme for save your eyes
 - Full Responsive
+- All notes are stored in local storage
+
 
 ## Next Features:soon:
-- Local Storage
 - Date and time the note was made
 
 #### :heavy_exclamation_mark: IRANsans fonts are considered a proprietary software. To gain information about the laws regarding the use of these fonts, please visit www.fontiran.com.

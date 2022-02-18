@@ -4,8 +4,8 @@ let accordion = $.querySelectorAll('.accordion');
 let noteTitleInput = $.getElementById('note-title');
 let noteDescription = $.getElementById('note-description');
 
-// preload
 
+// preload
 let preload = $.querySelector('.loader')
 
 function loading() {
@@ -13,11 +13,11 @@ function loading() {
 }
 window.addEventListener('load', loading)
 
-// Note Option Accordion 
 
+// Note Option Accordion 
 accordion.forEach(toolItemHeader => {
 
-    toolItemHeader.addEventListener('click', event => {
+    toolItemHeader.addEventListener('click', () => {
         toolItemHeader.classList.toggle('active');
         let toolItemBody = toolItemHeader.nextElementSibling;
 
@@ -36,7 +36,7 @@ let notePreview = $.querySelector('.note-preview')
 let h2Elem = $.querySelector('.note-preview-title')
 let notePreviewDescriptionText = $.querySelector('.note-preview-description-text')
 
-// input option event 
+// Get input option Elements
 let titleColor = $.getElementById('title-color-set');
 let descriptionColor = $.getElementById('description-color-set');
 let backgroundColor = $.getElementById('background-color-set');
@@ -47,86 +47,124 @@ let descriptionSize = $.getElementById('description-size-set')
 function titleColorValue() {
     h2Elem.style.color = titleColor.value
 }
-titleColor.addEventListener('change', titleColorValue);
+titleColor.addEventListener('input', titleColorValue);
 
 // DescriptionColor OnChange Event
 function descriptionColorValue() {
     notePreviewDescriptionText.style.color = descriptionColor.value
 }
-descriptionColor.addEventListener('change', descriptionColorValue)
+descriptionColor.addEventListener('input', descriptionColorValue)
 
 // backgroundColor OnChange Event
 function backgroundColorValue() {
     notePreview.style.backgroundColor = backgroundColor.value
 }
-backgroundColor.addEventListener('change', backgroundColorValue)
+backgroundColor.addEventListener('input', backgroundColorValue)
 
 function titleSizeValue() {
     h2Elem.style.fontSize = titleSize.value + 'px'
 }
-titleSize.addEventListener('change', titleSizeValue)
+titleSize.addEventListener('input', titleSizeValue)
 
 function descriptionSizeValue() {
     notePreviewDescriptionText.style.fontSize = descriptionSize.value + 'px'
 }
-descriptionSize.addEventListener('change', descriptionSizeValue)
-
+descriptionSize.addEventListener('input', descriptionSizeValue)
 
 // add and remove button action 
-
 let addBtn = $.getElementById('save');
 let clearBtn = $.getElementById('clear')
-
+let notesLocalStorage = []
 // save Button
-
 function addBtnAction() {
 
     if (!noteTitleInput.value) {
         alert('عنوان نمیتواند خالی باشد')
     } else {
-        let noteAdded = $.querySelector('.notes-added')
-        let noteFather = $.createElement('div')
+        let appendToStorage = {
+            id: notesLocalStorage.length + 1,
+            title: noteTitleInput.value,
+            description: noteDescription.value,
+            titleColor: titleColor.value,
+            descriptionColor: descriptionColor.value,
+            backgroundColor: backgroundColor.value,
+            titleSize: titleSize.value,
+            descriptionSize: descriptionSize.value
+        }
+        notesLocalStorage.push(appendToStorage)
+        getLocalStorage(notesLocalStorage)
+        notesGenerator(notesLocalStorage)
+        clearBtnAction()
+        noteTitleInput.focus()
+    }
+
+}
+addBtn.addEventListener('click', addBtnAction)
+
+function getLocalStorage(noteArray) {
+    localStorage.setItem('notes', JSON.stringify(noteArray))
+}
+
+let noteAdded = $.querySelector('.notes-added')
+// add New Notes Func
+function notesGenerator(noteArray) {
+    let noteFather, deleteIcon, noteHeadText, noteDescriptionTextElem, noteDescriptionText
+
+    noteAdded.innerHTML = ''
+
+    noteArray.forEach(function (note) {
+        noteFather = $.createElement('div')
 
         noteFather.classList.add('note-father')
-        noteFather.addEventListener('click', deleteNote)
-
-        let deleteIcon = $.createElement('i')
+        noteFather.setAttribute('onclick', 'deleteNote(' + note.id + ')')
+        deleteIcon = $.createElement('i')
         deleteIcon.className = 'fas fa-trash-alt note'
 
-        let noteHeadText = $.createElement('h2')
+        noteHeadText = $.createElement('h2')
         noteHeadText.className = 'note-preview-title note'
 
-        let noteDescriptionTextElem = $.createElement('div')
+        noteDescriptionTextElem = $.createElement('div')
         noteDescriptionTextElem.className = 'note-preview-description note'
 
-        let noteDescriptionText = $.createElement('p')
+        noteDescriptionText = $.createElement('p')
         noteDescriptionText.className = 'note-preview-description-text note-text'
 
         // input value add to note
-        noteHeadText.innerHTML = noteTitleInput.value
-        if (noteDescription.value === '') {
+        noteHeadText.innerHTML = note.title
+        if (note.description === '' && noteDescription.value === '') {
             noteHeadText.style.border = '0'
         }
-        noteDescriptionText.innerHTML = noteDescription.value
+        noteDescriptionText.innerHTML = note.description
 
         // note style add to element
         // color
-        noteFather.style.backgroundColor = backgroundColor.value
-        noteDescriptionText.style.color = descriptionColor.value
-        noteHeadText.style.color = titleColor.value
+        noteFather.style.backgroundColor = note.backgroundColor
+        noteDescriptionText.style.color = note.descriptionColor
+        noteHeadText.style.color = note.titleColor
         // size 
-        noteDescriptionText.style.fontSize = descriptionSize.value + 'px'
-        noteHeadText.style.fontSize = titleSize.value + 'px'
+        noteDescriptionText.style.fontSize = note.descriptionSize + 'px'
+        noteHeadText.style.fontSize = note.titleSize + 'px'
 
         // append to HTML 
-        noteFather.append(deleteIcon)
-        noteFather.append(noteHeadText)
-        noteFather.append(noteDescriptionTextElem)
-        noteDescriptionTextElem.append(noteDescriptionText)
+        noteFather.append(deleteIcon, noteHeadText, noteDescriptionTextElem, noteDescriptionText)
         noteAdded.prepend(noteFather)
-    }
+    })
 }
-addBtn.addEventListener('click', addBtnAction)
+
+// get local storage on load 
+function getDataOnLoad() {
+    let noteIndex = JSON.parse(localStorage.getItem('notes'))
+
+    if (!noteIndex) {
+        notesLocalStorage = []
+    } else {
+        notesLocalStorage = noteIndex
+    }
+
+    notesGenerator(notesLocalStorage)
+
+}
+window.addEventListener('load', getDataOnLoad)
 
 // Clear Button 
 function clearBtnAction() {
@@ -134,16 +172,20 @@ function clearBtnAction() {
     noteDescription.value = ''
 }
 clearBtn.addEventListener('click', clearBtnAction)
-// click to delete note 
 
-function deleteNote(event) {
-    if (event.target.classList.contains('note')) {
-        event.target.parentElement.remove();
-    } else if (event.target.classList.contains('note-text')) {
-        event.target.parentElement.parentElement.remove()
-    } else {
-        event.target.remove()
-    }
+// click to delete note 
+function deleteNote(noteid) {
+    let noteIndex = JSON.parse(localStorage.getItem('notes'))
+
+    notesLocalStorage = noteIndex
+
+    let removeNote = notesLocalStorage.findIndex(function (note) {
+        return note.id === noteid
+    })
+    notesLocalStorage.splice(removeNote, 1)
+
+    getLocalStorage(notesLocalStorage)
+    notesGenerator(notesLocalStorage)
 }
 
 
@@ -151,6 +193,7 @@ function deleteNote(event) {
 let darkMode = $.querySelector('.night-mode')
 let modeIcon = $.getElementById('theme')
 let darkTheme = false
+
 function darkModeBtn() {
     if (!darkTheme) {
         modeIcon.classList.remove('fa-sun')
@@ -170,7 +213,7 @@ darkMode.addEventListener('click', darkModeBtn)
 
 function windowOnLoadTheme() {
     let currentTheme = localStorage.getItem('theme')
-    if(currentTheme === null || currentTheme === 'light') {
+    if (currentTheme === null || currentTheme === 'light') {
         darkTheme = false
         darkModeBtn()
     } else {
@@ -180,3 +223,19 @@ function windowOnLoadTheme() {
 }
 window.addEventListener('load', windowOnLoadTheme)
 
+
+// inputs keydown event 
+noteTitleInput.addEventListener('keydown', function (event) {
+
+    if (event.keyCode == 13) {
+        event.preventDefault()
+        noteDescription.focus()
+    }
+})
+
+noteDescription.addEventListener('keydown', function (event) {
+    if (event.keyCode == 13) {
+        event.preventDefault()
+        addBtnAction()
+    }
+})
