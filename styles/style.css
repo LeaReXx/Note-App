@@ -572,7 +572,7 @@ input[type="color"]::-webkit-color-swatch {
     width: 280px;
     background-color: #067B9E;
     border-radius: 15px;
-    padding: 10px;
+    padding: 10px 10px 15px 10px;
     margin: 0 15px;
     border: 2px solid #ffffff00;
     position: relative;
@@ -598,6 +598,16 @@ input[type="color"]::-webkit-color-swatch {
 
 .note-father:hover .fa-trash-alt {
     opacity: 0.4;
+}
+.note-time {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 400;
+    width: 100%;
+    opacity: 0.7;
 }
 
 /* Responsive For min Width 410px or Higher */
@@ -743,5 +753,19 @@ input[type="color"]::-webkit-color-swatch {
     .left-section {
         width: 100%;
 
+    }
+    .note-time {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 0 15px;
+        font-size: 14px;
+        font-weight: 400;
+        width: 100%;
+        opacity: 0;
+        transition: all 0.1s;
+    }
+    .note-father:hover .note-time{
+        opacity: 0.7;
     }
 }

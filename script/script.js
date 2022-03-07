@@ -4,7 +4,6 @@ let accordion = $.querySelectorAll('.accordion');
 let noteTitleInput = $.getElementById('note-title');
 let noteDescription = $.getElementById('note-description');
 
-
 // preload
 let preload = $.querySelector('.loader')
 
@@ -72,8 +71,14 @@ function descriptionSizeValue() {
 descriptionSize.addEventListener('input', descriptionSizeValue)
 
 // add and remove button action 
+let date;
+setInterval(() => {
+    date = new persianDate().format('اضافه شده در DD MMMM YYYY ساعت HH:mm')
+}, 1000);
+
 let addBtn = $.getElementById('save');
 let clearBtn = $.getElementById('clear')
+
 let notesLocalStorage = []
 // save Button
 function addBtnAction() {
@@ -89,7 +94,8 @@ function addBtnAction() {
             descriptionColor: descriptionColor.value,
             backgroundColor: backgroundColor.value,
             titleSize: titleSize.value,
-            descriptionSize: descriptionSize.value
+            descriptionSize: descriptionSize.value,
+            date: date
         }
         notesLocalStorage.push(appendToStorage)
         getLocalStorage(notesLocalStorage)
@@ -108,7 +114,7 @@ function getLocalStorage(noteArray) {
 let noteAdded = $.querySelector('.notes-added')
 // add New Notes Func
 function notesGenerator(noteArray) {
-    let noteFather, deleteIcon, noteHeadText, noteDescriptionTextElem, noteDescriptionText
+    let noteFather, deleteIcon, noteHeadText, noteDescriptionTextElem, noteDescriptionText, time
 
     noteAdded.innerHTML = ''
 
@@ -129,6 +135,9 @@ function notesGenerator(noteArray) {
         noteDescriptionText = $.createElement('p')
         noteDescriptionText.className = 'note-preview-description-text note-text'
 
+        time = $.createElement('span')
+        time.className = 'note-time'
+        time.innerHTML = note.date
         // input value add to note
         noteHeadText.innerHTML = note.title
         if (note.description === '' && noteDescription.value === '') {
@@ -146,7 +155,7 @@ function notesGenerator(noteArray) {
         noteHeadText.style.fontSize = note.titleSize + 'px'
 
         // append to HTML 
-        noteFather.append(deleteIcon, noteHeadText, noteDescriptionTextElem, noteDescriptionText)
+        noteFather.append(deleteIcon, noteHeadText, noteDescriptionTextElem, noteDescriptionText, time)
         noteAdded.prepend(noteFather)
     })
 }
@@ -227,14 +236,14 @@ window.addEventListener('load', windowOnLoadTheme)
 // inputs keydown event 
 noteTitleInput.addEventListener('keydown', function (event) {
 
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
         event.preventDefault()
         noteDescription.focus()
     }
 })
 
 noteDescription.addEventListener('keydown', function (event) {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
         event.preventDefault()
         addBtnAction()
     }
