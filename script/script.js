@@ -111,53 +111,40 @@ function getLocalStorage(noteArray) {
     localStorage.setItem('notes', JSON.stringify(noteArray))
 }
 
-let noteAdded = $.querySelector('.notes-added')
-// add New Notes Func
+// add New Notes Function
+let noteAdded = $.querySelector(".notes-added");
 function notesGenerator(noteArray) {
-    let noteFather, deleteIcon, noteHeadText, noteDescriptionTextElem, noteDescriptionText, time
+  noteAdded.innerHTML = "";
+  let border;
+  noteArray.forEach(function (note) {
+    if (!note.description) {
+      border = "unset";
+    } else {
+      border = "2px dashed rgb(0 0 0 / 60%)";
+    }
 
-    noteAdded.innerHTML = ''
-
-    noteArray.forEach(function (note) {
-        noteFather = $.createElement('div')
-
-        noteFather.classList.add('note-father')
-        noteFather.setAttribute('onclick', 'deleteNote(' + note.id + ')')
-        deleteIcon = $.createElement('i')
-        deleteIcon.className = 'fas fa-trash-alt note'
-
-        noteHeadText = $.createElement('h2')
-        noteHeadText.className = 'note-preview-title note'
-
-        noteDescriptionTextElem = $.createElement('div')
-        noteDescriptionTextElem.className = 'note-preview-description note'
-
-        noteDescriptionText = $.createElement('p')
-        noteDescriptionText.className = 'note-preview-description-text note-text'
-
-        time = $.createElement('span')
-        time.className = 'note-time'
-        time.innerHTML = note.date
-        // input value add to note
-        noteHeadText.innerHTML = note.title
-        if (note.description === '' && noteDescription.value === '') {
-            noteHeadText.style.border = '0'
-        }
-        noteDescriptionText.innerHTML = note.description
-
-        // note style add to element
-        // color
-        noteFather.style.backgroundColor = note.backgroundColor
-        noteDescriptionText.style.color = note.descriptionColor
-        noteHeadText.style.color = note.titleColor
-        // size 
-        noteDescriptionText.style.fontSize = note.descriptionSize + 'px'
-        noteHeadText.style.fontSize = note.titleSize + 'px'
-
-        // append to HTML 
-        noteFather.append(deleteIcon, noteHeadText, noteDescriptionTextElem, noteDescriptionText, time)
-        noteAdded.prepend(noteFather)
-    })
+    noteAdded.insertAdjacentHTML(
+      "afterbegin",
+      `
+        <div class="note-father" onclick="deleteNote(` + note.id +`)" style="
+        background-color: ` + note.backgroundColor + `";>
+        <i class="fas fa-trash-alt note"></i>
+        <h2 class="note-preview-title note" style="
+        color: ` + note.titleColor + `; 
+        font-size: ` + note.titleSize + "px" + `; 
+        border-bottom: ` + border + `;">`
+         + note.title + `
+         </h2>
+        <div class="note-preview-description note">
+        <p class="note-preview-description-text note-text" style="
+        color: ` + note.descriptionColor + `; 
+        font-size: ` + note.descriptionSize + "px" +`">`
+         + note.description +`</p>
+        </div>
+        <span class="note-time">` + note.date +`</span>
+        </div>`
+    );
+  });
 }
 
 // get local storage on load 
