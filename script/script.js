@@ -30,7 +30,9 @@ accordion.forEach((toolItemHeader) => {
 let notePreview = $.querySelector(".note-preview");
 let demoInputs = $.querySelectorAll(".demo-inputs");
 let h2Elem = $.querySelector(".note-preview-title");
-let notePreviewDescriptionText = $.querySelector(".note-preview-description-text");
+let notePreviewDescriptionText = $.querySelector(
+  ".note-preview-description-text"
+);
 // Get input option Elements
 let titleColor = $.getElementById("title-color-set");
 let descriptionColor = $.getElementById("description-color-set");
