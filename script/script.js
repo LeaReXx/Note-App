@@ -107,15 +107,14 @@ class NoteInputs {
             this.noteTimeAdded()
           )
         );
+        this.saveToLocalStorage();
       }
-      console.log(this.allNotes);
       this.noteInputCleaner();
     });
   }
 
   getNotesOnLoad() {
     this.allNotes = JSON.parse(localStorage.getItem("notes")) || [];
-    saveToLocalStorage()
   }
 
   saveToLocalStorage() {
