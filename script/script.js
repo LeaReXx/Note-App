@@ -23,7 +23,8 @@ class NewNote {
     descriptionColor,
     backgroundColor,
     titleSize,
-    descriptionSize
+    descriptionSize,
+    date
   ) {
     this.title = title;
     this.description = description;
@@ -32,13 +33,18 @@ class NewNote {
     this.backgroundColor = backgroundColor;
     this.titleSize = titleSize;
     this.descriptionSize = descriptionSize;
+    this.date = date;
   }
 }
 
 class NoteInputs {
   constructor() {
+    // input title and description
     this.noteTitleInput = $.getElementById("note-title");
     this.noteDescription = $.getElementById("note-description");
+    // note cancel and save btns
+    this.saveBtn = $.querySelector("#save");
+    this.clearBtn = $.querySelector("#clear");
     // // Get input option Elements
     this.titleColor = $.getElementById("title-color-set");
     this.descriptionColor = $.getElementById("description-color-set");
@@ -55,7 +61,10 @@ class NoteInputs {
     );
     this.noteDemoPreview();
     this.noteOptions();
+    this.noteSave();
+    this.getNotesOnLoad();
   }
+
   noteOptions() {
     for (let inputOption of this.demoInputs) {
       inputOption.addEventListener("input", () => {
@@ -72,19 +81,45 @@ class NoteInputs {
     this.notePreviewDescription.style.fontSize = `${this.descriptionSize.value}px`;
   }
 
+  noteInputCleaner() {
+    this.noteTitleInput.value = "";
+    this.noteDescription.value = "";
+  }
+
+  noteTimeAdded() {
+    return new persianDate().format("اضافه شده در DD MMMM YYYY ساعت HH:mm");
+  }
+
+  noteSave() {
+    this.saveBtn.addEventListener("click", () => {
+      if (!this.noteTitleInput.value.trim()) {
+        alert("عنوان نمیتواند خالی باشد!");
+      } else {
+        this.allNotes.push(
+          new NewNote(
+            this.noteTitleInput.value,
+            this.noteDescription.value,
+            this.titleColor.value,
+            this.descriptionColor.value,
+            this.backgroundColor.value,
+            this.titleSize.value,
+            this.descriptionSize.value,
+            this.noteTimeAdded()
+          )
+        );
+      }
+      console.log(this.allNotes);
+      this.noteInputCleaner();
+    });
+  }
+
+  getNotesOnLoad() {
+    this.allNotes = JSON.parse(localStorage.getItem("notes")) || [];
+    saveToLocalStorage()
+  }
+
+  saveToLocalStorage() {
+    localStorage.setItem("notes", JSON.stringify(this.allNotes));
+  }
 }
 new NoteInputs();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
