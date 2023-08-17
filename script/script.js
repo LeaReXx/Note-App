@@ -51,7 +51,6 @@ var noteDemoHandler = function () {
     notePreviewDescriptionText.style.color = descriptionColorValue();
     notePreview.style.backgroundColor = backgroundColorValue();
     h2Elem.style.fontSize = titleSizeValue();
-    console.log(notePreviewDescriptionText.style.fontSize);
     notePreviewDescriptionText.style.fontSize = descriptionSizeValue();
 };
 demoInputs.forEach(function (inputs) {
@@ -84,7 +83,6 @@ var addBtnAction = function () {
             descriptionSize: descriptionSizeValue(),
             date: notesDate,
         };
-        console.log(appendToStorage);
         notesLocalStorage.push(appendToStorage);
         setLocalStorage(notesLocalStorage);
         notesGenerator(notesLocalStorage);
